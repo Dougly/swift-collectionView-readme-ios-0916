@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    var numberInCell = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +33,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "basicCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "basicCell", for: indexPath) as! customCell
         
         cell.backgroundColor = UIColor.getRandomColor()
+        cell.cellLabel.text = String(numberInCell)
+        
+        //scrolling only increases the numbers in the cell
+        numberInCell += 1
+        
         return cell
     }
 }
 
+class customCell: UICollectionViewCell {
+    
+    @IBOutlet weak var cellLabel: UILabel!
+
+    
+}
